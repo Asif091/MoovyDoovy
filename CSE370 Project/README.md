@@ -1,2 +1,7 @@
 # MoovyDoovy
-This is a CSE370 Lab project of Movie Ticket Database base Management System named "MoovyDoovy".
+Here you can find skeleton of our dbms.
+like:
+EER Diagram
+Schema
+Login/Logout
+Homepage
