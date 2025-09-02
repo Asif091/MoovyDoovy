@@ -1,0 +1,17 @@
+<?php
+
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "CinemaDB";
+
+$conn = new mysqli($host, $user, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+else {
+     //echo "Connected successfully";
+     mysqli_select_db($conn, $database);
+}
+?>
