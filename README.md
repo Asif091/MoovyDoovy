@@ -1,14 +1,15 @@
-# MoovyDoovy
-This is a CSE370 Project of cinema booking database named 'MoovyDooby'.
-## Team Members
-- 24341132: Saikat Rahman Asif
-- 24141128: MD.Saidul Islam
-- 21341050: Khondokar Touky Tahmid
-### Features
-1. Movie Listing & Details
-2. Showtime & Cinema Selection
-3. Show update
-4. Seat Selection
-5. Payment gateway
-6. Booking Summary & Confirmation
-7. Ticket Generation
+Hello There, It is a simple university project of CSE370 database course. We have made a simple UI and basic SQL commands to make this project. Created with help of YouTube, Google, GitHub, Stack Overflow, free templates on the internet and so on.
+
+Language Used:
+Frontend: HTML, CSS, Javascript
+Backend: PHP
+Database: MYSQL
+
+Login info:
+Admin:
+Email_1: admin1@email.com 
+Password: admin12
+Email_2: admin2@email.com
+Password: admin12
+Customer:
+Must need to register first
