@@ -1,20 +1,23 @@
-#MoovyDoovy
-Hello There, It is a simple university project of CSE370 database course. We have made a simple UI and basic SQL commands to make this project. Created with help of YouTube, Google, GitHub, Stack Overflow, free templates on the internet and so on.
+# MoovyDoovy
 
-#Contributers:
-MD.Saidul Islam
-Saikat Rahman Asif
+Hello there! MoovyDoovy is a simple university project for the CSE370 Database course. We created a basic UI and implemented essential SQL commands to build this project, with help from YouTube, Google, GitHub, and Stack Overflow.
 
-#Language Used:
-Frontend: HTML, CSS, Javascript
-Backend: PHP
-Database: MYSQL
+## Contributors
+- MD. Saidul Islam (User Panel)
+- Saikat Rahman Asif (Admin Panel)
 
-#Login info:
-#Admin:
-Email_1: admin1@email.com 
-Password: admin12
-Email_2: admin2@email.com
-Password: admin12
-#Customer:
-Must need to register first
+## Languages Used
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** PHP
+- **Database:** MySQL
+
+## Login Info
+
+### Admin
+- **Email 1:** admin1@email.com  
+  **Password:** admin12
+- **Email 2:** admin2@email.com  
+  **Password:** admin12
+
+### Customer
+- Registration is required before login.
