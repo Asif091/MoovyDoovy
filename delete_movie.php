@@ -2,18 +2,18 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in and is admin
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Get user info and check if admin
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT u.user_id, u.first_name, u.last_name FROM users u INNER JOIN admin a ON u.user_id = a.user_id WHERE u.email = '$email'");
 
 if (!$user_result || $user_result->num_rows === 0) {
-    // Not an admin, redirect to user page
+    
     header("Location: user_page.php");
     exit();
 }
@@ -21,15 +21,15 @@ if (!$user_result || $user_result->num_rows === 0) {
 $user_data = $user_result->fetch_assoc();
 $admin_user_id = $user_data['user_id'];
 
-// Handle movie deletion
+
 if (isset($_POST['delete_movie']) && !empty($_POST['movie_name'])) {
     $movie_to_delete = $_POST['movie_name'];
     
-    // Check if movie has any showtimes
+    
     $showtime_check = $conn->query("SELECT COUNT(*) as count FROM showtime WHERE movie_name = '" . $conn->real_escape_string($movie_to_delete) . "'");
     $showtime_count = $showtime_check->fetch_assoc()['count'];
     
-    // Check if movie has any bookings
+    
     $booking_check = $conn->query("SELECT COUNT(*) as count FROM booking b INNER JOIN showtime s ON b.show_id = s.show_id WHERE s.movie_name = '" . $conn->real_escape_string($movie_to_delete) . "'");
     $booking_count = $booking_check->fetch_assoc()['count'];
     
@@ -38,7 +38,7 @@ if (isset($_POST['delete_movie']) && !empty($_POST['movie_name'])) {
     } elseif ($showtime_count > 0) {
         $error_message = "Cannot delete '$movie_to_delete'. This movie has $showtime_count scheduled showtimes. Please remove all showtimes first.";
     } else {
-        // Safe to delete
+        
         $delete_stmt = $conn->prepare("DELETE FROM movie WHERE movie_name = ?");
         $delete_stmt->bind_param("s", $movie_to_delete);
         if ($delete_stmt->execute()) {
@@ -49,7 +49,7 @@ if (isset($_POST['delete_movie']) && !empty($_POST['movie_name'])) {
     }
 }
 
-// Get all movies
+
 $result = $conn->query("SELECT m.movie_name, m.genre, m.duration, m.release_date, m.details,
                                COUNT(s.show_id) as showtime_count,
                                COUNT(b.booking_id) as booking_count
@@ -376,4 +376,5 @@ if ($result) {
         }
     </script>
 </body>
+
 </html>
