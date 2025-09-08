@@ -2,19 +2,19 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Get user info
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT user_id FROM users WHERE email = '$email'");
 $user_data = $user_result->fetch_assoc();
 $user_id = $user_data['user_id'];
 
-// Get user's bookings
+
 $bookings_query = "
     SELECT 
         b.booking_id,
@@ -310,4 +310,5 @@ $bookings_result = $conn->query($bookings_query);
         <?php endif; ?>
     </div>
 </body>
+
 </html>
