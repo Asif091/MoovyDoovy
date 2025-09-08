@@ -2,13 +2,13 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Check if booking_id is provided
+
 if (!isset($_GET['booking_id'])) {
     header("Location: my_bookings.php");
     exit();
@@ -16,13 +16,13 @@ if (!isset($_GET['booking_id'])) {
 
 $booking_id = $_GET['booking_id'];
 
-// Get user info
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT user_id FROM users WHERE email = '$email'");
 $user_data = $user_result->fetch_assoc();
 $user_id = $user_data['user_id'];
 
-// Get booking details
+
 $booking_details_query = "
     SELECT 
         b.booking_id,
@@ -395,4 +395,5 @@ $ticket_reference = strtoupper(substr(md5($booking['booking_id'] . $booking['mov
         }, 5000);
     </script>
 </body>
+
 </html>
