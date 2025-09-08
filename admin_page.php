@@ -233,19 +233,7 @@ $hall_count = $conn->query("SELECT COUNT(*) as count FROM hall")->fetch_assoc()[
 
 </html>
 
-<!-- 
 
-// session_start();
-
-// $errors = [
-//   'show_listing' => $_SESSION['show_listing_error'] ?? '',
-// ];
-
-// function showError($error)
-// {
-//   return !empty($error) ? "<p class='error-message'>$error</p>" : '';
-// }
-// ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -285,4 +273,5 @@ $hall_count = $conn->query("SELECT COUNT(*) as count FROM hall")->fetch_assoc()[
 </body>
 
 
-</html> -->
+</html> 
+
