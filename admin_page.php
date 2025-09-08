@@ -2,13 +2,13 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in and is admin
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Get user info and check if admin
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT u.user_id, u.first_name, u.last_name FROM users u INNER JOIN admin a ON u.user_id = a.user_id WHERE u.email = '$email'");
 
@@ -21,7 +21,7 @@ if (!$user_result || $user_result->num_rows === 0) {
 $user_data = $user_result->fetch_assoc();
 $admin_user_id = $user_data['user_id'];
 
-// Get some dashboard stats
+
 $movie_count = $conn->query("SELECT COUNT(*) as count FROM movie")->fetch_assoc()['count'];
 $showtime_count = $conn->query("SELECT COUNT(*) as count FROM showtime WHERE date >= CURDATE()")->fetch_assoc()['count'];
 $booking_count = $conn->query("SELECT COUNT(*) as count FROM booking")->fetch_assoc()['count'];
@@ -283,5 +283,6 @@ $hall_count = $conn->query("SELECT COUNT(*) as count FROM hall")->fetch_assoc()[
         </div>
     </div>
 </body>
+
 
 </html> -->
