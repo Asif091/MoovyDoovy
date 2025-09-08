@@ -2,13 +2,13 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Check if booking_id is provided
+
 if (!isset($_GET['booking_id'])) {
     header("Location: user_page.php");
     exit();
@@ -16,13 +16,13 @@ if (!isset($_GET['booking_id'])) {
 
 $booking_id = $_GET['booking_id'];
 
-// Get user info
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT user_id FROM users WHERE email = '$email'");
 $user_data = $user_result->fetch_assoc();
 $user_id = $user_data['user_id'];
 
-// Verify this booking belongs to the logged-in user
+
 $verify_booking = $conn->query("SELECT booking_id FROM booking WHERE booking_id = $booking_id AND user_id = $user_id");
 if (!$verify_booking || $verify_booking->num_rows == 0) {
     header("Location: user_page.php");
@@ -241,4 +241,5 @@ if (!$verify_booking || $verify_booking->num_rows == 0) {
         </div>
     </div>
 </body>
+
 </html>
