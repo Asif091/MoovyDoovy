@@ -2,24 +2,24 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Get user info
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT user_id FROM users WHERE email = '$email'");
 $user_data = $user_result->fetch_assoc();
 $user_id = $user_data['user_id'];
 
-// Get current date and calculate next 2 days
+
 $today = date('Y-m-d');
 $tomorrow = date('Y-m-d', strtotime('+1 day'));
 $day_after_tomorrow = date('Y-m-d', strtotime('+2 days'));
 
-// Get all movies with their showtimes for next 2 days only
+
 $movies_query = "
     SELECT DISTINCT 
         m.movie_name, 
@@ -267,4 +267,5 @@ if (isset($_GET['movie'])) {
         }
     </script>
 </body>
+
 </html>
