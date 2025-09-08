@@ -2,13 +2,13 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Check if show_id is provided
+
 if (!isset($_POST['show_id']) && !isset($_GET['show_id'])) {
     header("Location: movies.php");
     exit();
@@ -16,7 +16,7 @@ if (!isset($_POST['show_id']) && !isset($_GET['show_id'])) {
 
 $show_id = $_POST['show_id'] ?? $_GET['show_id'];
 
-// Get showtime details
+
 $showtime_query = "
     SELECT 
         s.show_id,
@@ -66,7 +66,6 @@ if ($booked_seats_result) {
     }
 }
 
-// Generate seat layout (if no seats in database, create a default layout)
 $all_seats = [];
 if ($seats_result && $seats_result->num_rows > 0) {
     while ($row = $seats_result->fetch_assoc()) {
@@ -79,7 +78,6 @@ if ($seats_result && $seats_result->num_rows > 0) {
     }
 }
 
-// Set ticket price (default ৳500)
 $ticket_price = 500.00;
 ?>
 
@@ -354,4 +352,5 @@ $ticket_price = 500.00;
         }
     </script>
 </body>
+
 </html>
