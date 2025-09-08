@@ -2,13 +2,13 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Check if booking data is provided
+
 if (!isset($_POST['show_id']) || !isset($_POST['selected_seats']) || !isset($_POST['ticket_price'])) {
     header("Location: movies.php");
     exit();
@@ -18,13 +18,13 @@ $show_id = $_POST['show_id'];
 $selected_seats = explode(',', $_POST['selected_seats']);
 $ticket_price = floatval($_POST['ticket_price']);
 
-// Get user info
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT user_id FROM users WHERE email = '$email'");
 $user_data = $user_result->fetch_assoc();
 $user_id = $user_data['user_id'];
 
-// Get showtime details
+
 $showtime_query = "
     SELECT 
         s.show_id,
@@ -50,7 +50,7 @@ if (!$showtime_result || $showtime_result->num_rows == 0) {
 
 $showtime = $showtime_result->fetch_assoc();
 
-// Check if seats are still available
+
 $seat_check_query = "
     SELECT booking_seat_no 
     FROM booking_seat_no bsn
@@ -65,52 +65,52 @@ if ($seat_check_result && $seat_check_result->num_rows > 0) {
     exit();
 }
 
-// Process booking if form is submitted
+
 if (isset($_POST['confirm_payment'])) {
     try {
-        // Start transaction
+        
         $conn->autocommit(FALSE);
         
-        // Calculate total price
+        
         $total_price = count($selected_seats) * $ticket_price;
         
-        // Insert booking
+        
         $booking_query = "INSERT INTO booking (ticket_price, show_id, user_id) VALUES ($total_price, $show_id, $user_id)";
         $conn->query($booking_query);
         $booking_id = $conn->insert_id;
         
-        // Insert seat bookings
+        
         foreach ($selected_seats as $seat_no) {
             $seat_query = "INSERT INTO booking_seat_no (booking_id, booking_seat_no) VALUES ($booking_id, $seat_no)";
             $conn->query($seat_query);
         }
         
-        // Insert payment record
+        
         $payment_query = "INSERT INTO payment (booking_id, payment_status) VALUES ($booking_id, 'completed')";
         $conn->query($payment_query);
         
-        // Commit transaction
+        
         $conn->commit();
         $conn->autocommit(TRUE);
         
-        // Redirect to success page
+        
         header("Location: booking_success.php?booking_id=$booking_id");
         exit();
         
     } catch (Exception $e) {
-        // Rollback on error
+        
         $conn->rollback();
         $conn->autocommit(TRUE);
         $error_message = "Booking failed. Please try again.";
     }
 }
 
-// If success parameter is present, show ticket
+
 $booking_success = isset($_GET['success']) && $_GET['success'] == 1;
 $booking_id = $_GET['booking_id'] ?? null;
 
 if ($booking_success && $booking_id) {
-    // Get booking details
+    
     $booking_details_query = "
         SELECT 
             b.booking_id,
@@ -535,4 +535,5 @@ $total_amount = count($selected_seats) * $ticket_price;
         <?php endif; ?>
     </div>
 </body>
+
 </html>
