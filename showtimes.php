@@ -2,18 +2,18 @@
 session_start();
 require_once 'db_connect.php';
 
-// Check if user is logged in and is admin
+
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
 
-// Get user info and check if admin
+
 $email = $_SESSION['email'];
 $user_result = $conn->query("SELECT u.user_id, u.first_name, u.last_name FROM users u INNER JOIN admin a ON u.user_id = a.user_id WHERE u.email = '$email'");
 
 if (!$user_result || $user_result->num_rows === 0) {
-    // Not an admin, redirect to user page
+    
     header("Location: user_page.php");
     exit();
 }
@@ -47,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-// READ showtimes (filter by movie if provided, else show all upcoming)
-// READ showtimes
+
 if ($movie) {
   $result = $conn->query("
     SELECT s.show_id, s.date, TIME_FORMAT(s.start,'%H:%i') st, TIME_FORMAT(s.end,'%H:%i') en,
@@ -152,3 +151,4 @@ td,th{border:1px solid #ddd;padding:8px}
   </div>
 </div>
 </body></html>
+
