@@ -3,7 +3,7 @@ require_once 'db_connect.php';
 
 echo "<h1>MoovyDoovy Admin Setup Test</h1>";
 
-// Check if new admin users exist
+
 $result = $conn->query("SELECT u.first_name, u.last_name, u.email, a.user_id as is_admin 
                         FROM users u 
                         LEFT JOIN admin a ON u.user_id = a.user_id 
@@ -51,4 +51,5 @@ echo "<li><strong>Customer:</strong> john@example.com / password123</li>";
 echo "</ul>";
 
 $conn->close();
+
 ?>
